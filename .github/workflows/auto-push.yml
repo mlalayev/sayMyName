@@ -1,0 +1,28 @@
+	name: Auto Commit and Push
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # Her gün gece 00:00'da çalışır (UTC)
+
+  push:
+    branches:
+      - main
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Make Changes
+        run: echo "$(date)" > update.log
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name "Murad Lalayev"
+          git config --global user.email "lalayevmurad@gmail.com"
+          git add .
+          git commit -m "Auto update $(date)" || exit 0
+          git push
