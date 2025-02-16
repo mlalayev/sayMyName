@@ -1,8 +1,8 @@
-	name: Auto Commit and Push
+name: Auto Commit and Push
 
 on:
   schedule:
-    - cron: "0 0 * * *" # Her gün gece 00:00'da çalışır (UTC)
+    - cron: "26 1 * * *" # Her gün 01:26'da çalışır (UTC)
 
   push:
     branches:
@@ -16,13 +16,18 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Make Changes
-        run: echo "$(date)" > update.log
-
-      - name: Commit and Push
+      - name: Make Multiple Commits
         run: |
           git config --global user.name "Murad Lalayev"
           git config --global user.email "lalayevmurad@gmail.com"
-          git add .
-          git commit -m "Auto update $(date)" || exit 0
+          
+          # 5 farklı commit yapmak için döngü
+          for i in {1..5}
+          do
+            echo "Commit $i - $(date)" >> update.log
+            git add update.log
+            git commit -m "Auto update $i - $(date)"
+            sleep 2  # 2 saniye bekleyerek commit zamanlarını farklı yapar
+          done
+
           git push
