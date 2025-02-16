@@ -18,7 +18,7 @@ jobs:
 
       - name: Make Multiple Commits
         run: |
-          git config --global user.name "Murad Lalayev"
+          git config --global user.name "Murad Lalayev" 
           git config --global user.email "lalayevmurad@gmail.com"
           
           # 5 farklı commit yapmak için döngü
@@ -27,7 +27,7 @@ jobs:
             echo "Commit $i - $(date)" >> update.log
             git add update.log
             git commit -m "Auto update $i - $(date)"
-            sleep 2  # 2 saniye bekleyerek commit zamanlarını farklı yapar
+            sleep 2 
           done
 
           git push
