@@ -2,7 +2,7 @@ name: Auto Commit and Push
 
 on:
   schedule:
-    - cron: "26 1 * * *" # Her gün 01:26'da çalışır (UTC)
+    - cron: "36 1 * * *"
 
   push:
     branches:
